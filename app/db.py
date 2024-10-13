@@ -1,5 +1,5 @@
 from redis import StrictRedis
-from .core.config import REDIS_PRIMARY_ENDPOINT, REDIS_PORT
+from app.core.config import REDIS_PRIMARY_ENDPOINT, REDIS_PORT
 
 # Redis 클라이언트 초기화
 try: 
