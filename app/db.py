@@ -3,12 +3,12 @@ from app.core.config import REDIS_PRIMARY_ENDPOINT, REDIS_PORT
 
 # Redis 클라이언트 초기화
 try: 
-    redis_client_email_auth = StrictRedis(
+    redis_client_auth = StrictRedis(
         host=REDIS_PRIMARY_ENDPOINT,
         port=REDIS_PORT,
         db=1
     )
-    redis_client_email_auth.ping()
+    redis_client_auth.ping()
     print("이메일 인증 Redis 연결 성공")
 except Exception as e:
     print(f"이메일 인증 Redis 연결 실패: {e}")
