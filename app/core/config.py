@@ -1,4 +1,8 @@
 import os
+from dotenv import load_dotenv
+
+# .env 환경변수 적용
+load_dotenv()
 
 # AWS Redis 관련 환경변수
 # Redis 기본 엔드포인트 (샤드 0, 노드가 하나이므로 이 하나만 사용)
