@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from app.api import api_router
 
 app = FastAPI()
+app.include_router(api_router)
 
 # 모든 출처에서의 요청을 허용하기 위한 CORS 설정
 app.add_middleware(
@@ -14,4 +17,4 @@ app.add_middleware(
 
 @app.get("/")
 async def health():
-    return "good", 200
+    return JSONResponse(content={"message": "good"}, status_code=200)
