@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from app.api import api_router
 
@@ -15,6 +15,9 @@ app.add_middleware(
     allow_headers=["*"],  # 모든 헤더 허용
 )
 
-@app.get("/")
+# include_in_schema=False 설정 시
+# 1. OpenAPI 스키마 생성 시간 단축
+# 2. 라우터 정보에 표시되지 않아 보안적 이점
+@app.get("/", include_in_schema=False)
 async def health():
-    return JSONResponse(content={"message": "good"}, status_code=200)
+    return PlainTextResponse(content="ok", status_code=200)
