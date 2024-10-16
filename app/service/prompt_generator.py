@@ -1,7 +1,7 @@
 from langchain_openai.chat_models import ChatOpenAI
-from langchain.output_parsers import JsonOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 from langchain.prompts import PromptTemplate
-from app.service.prompt import make_problem_prompt
+from prompt import make_problem_prompt
 from langchain.schema import (
     HumanMessage,
     SystemMessage

@@ -2,8 +2,8 @@ import base64
 import io
 import pdf2image
 import asyncio
-from langchain.chat_models import ChatOpenAI
-from langchain.output_parsers import JsonOutputParser
+from langchain_openai.chat_models import ChatOpenAI
+from langchain_core.output_parsers import JsonOutputParser
 from langchain.schema import HumanMessage, SystemMessage
 import logging
 
