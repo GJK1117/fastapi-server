@@ -8,22 +8,22 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # 사용자별로 컬렉션 생성 및 임베딩/벡터 저장 (비동기 처리)
-async def create_or_load_user_vectorstore(user_id: str, docs: list):
+async def create_or_load_user_vectorstore(user_id: str, text: str):
     try:
         # 사용자 ID에 맞는 컬렉션 생성/로드
         collection_name = f"user_{user_id}_collection"
 
-        # 문자열 리스트를 Document 객체 리스트로 변환
-        documents = [Document(page_content=doc) for doc in docs]
+        # 입력된 텍스트를 Document 객체로 변환
+        documents = Document(page_content=text)
 
         # 텍스트 분할기 사용
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-        splits = text_splitter.split_documents(documents)
+        splits = text_splitter.split_documents([documents])
 
         # 비동기 OpenAI 임베딩 모델 사용
         embeddings = OpenAIEmbeddings()
 
-        # Chroma 벡터 저장소 생성 (await 제거)
+        # Chroma 벡터 저장소 생성
         vectorstore = Chroma(
             persist_directory=f"./chroma_vectorstore/{user_id}",
             embedding_function=embeddings,
@@ -33,8 +33,6 @@ async def create_or_load_user_vectorstore(user_id: str, docs: list):
         # 비동기 문서 추가
         await vectorstore.aadd_documents(splits)
         logging.info(f"Documents successfully added for user {user_id}.")
-        
-        return vectorstore
 
     except ValueError as ve:
         logging.error(f"ValueError occurred for user {user_id}: {ve}")
