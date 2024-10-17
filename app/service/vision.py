@@ -11,12 +11,11 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # PDF 또는 이미지 파일을 변환하고 OpenAI API를 호출하는 통합 함수
-async def process_files_and_analyze(file_content: bytes, file_type: str, is_pdf: bool = False, custom_prompt: str = ""):
+async def process_files_and_analyze(file_content: bytes, is_pdf: bool = False, custom_prompt: str = ""):
     """
     PDF 또는 이미지 파일을 변환하여 OpenAI API를 통해 분석하는 함수
     Args:
         file_content (bytes): 업로드된 파일(PDF 또는 이미지)의 내용
-        file_type (str): 파일 형식 (pdf 또는 image)
         is_pdf (bool): PDF 여부
         custom_prompt (str): 사용자 정의 프롬프트
     Returns:
